@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071426">
+  <meta name="description" content="WolFox GPS Module — معلومات الإصدار وروابط المشروع والخريطة.">
+  <title>WolFox GPS | موديل تحديد الموقع</title>
+  <style>
+    :root{color-scheme:dark;--bg:#071426;--panel:#0d1d33;--line:#1f3855;--text:#eef5ff;--muted:#a9bbd1;--blue:#2787f5;--mint:#7ee2cf}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(ellipse at 85% 0%,#15395f 0,transparent 42%),var(--bg);color:var(--text);font-family:system-ui,"Noto Sans Arabic",Tahoma,Arial,sans-serif;line-height:1.7}
+    a{color:inherit}
+    .wrap{width:min(1060px,calc(100% - 32px));margin-inline:auto}
+    header{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:750}
+    .brand img{width:44px;height:44px;object-fit:contain;border-radius:12px}
+    nav{display:flex;gap:20px;color:var(--muted);font-size:.95rem}
+    nav a{text-decoration:none}
+    nav a:hover{color:var(--text)}
+    .hero{padding:65px 0 58px;display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:center}
+    .eyebrow{color:var(--mint);font-size:.9rem;font-weight:700;letter-spacing:.02em}
+    h1{font-size:clamp(2.25rem,6vw,4.2rem);line-height:1.16;margin:12px 0 18px;letter-spacing:-.04em}
+    .lead{max-width:650px;color:var(--muted);font-size:1.12rem;margin:0}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+    .button{display:inline-flex;justify-content:center;align-items:center;min-height:48px;padding:10px 18px;border:1px solid var(--line);border-radius:13px;text-decoration:none;font-weight:700;transition:transform .18s,border-color .18s,background .18s}
+    .button:hover{transform:translateY(-2px);border-color:var(--blue)}
+    .button.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+    .button.ghost{background:#0b1b30}
+    .version{padding:24px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#102541,#0a192b);box-shadow:0 24px 70px #0003}
+    .version-top{display:flex;justify-content:space-between;align-items:center;gap:14px}
+    .version-label{color:var(--muted);font-size:.9rem}
+    .badge{padding:5px 10px;border:1px solid #28644f;border-radius:999px;color:var(--mint);font-size:.82rem}
+    .version strong{display:block;margin-top:13px;font-size:2rem}
+    .version p{color:var(--muted);margin:5px 0 0}
+    .section{padding:24px 0 64px}
+    .section h2{font-size:1.65rem;margin:0 0 18px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .card{padding:22px;border:1px solid var(--line);border-radius:18px;background:#0b1a2d}
+    .card h3{font-size:1.05rem;margin:0 0 8px}
+    .card p{color:var(--muted);margin:0}
+    .card code{direction:ltr;unicode-bidi:embed;overflow-wrap:anywhere;color:#d8eaff}
+    .note{margin-top:16px;padding:15px 18px;border-right:3px solid var(--blue);border-radius:10px;background:#0a1a2c;color:var(--muted)}
+    footer{border-top:1px solid var(--line);padding:22px 0 34px;color:var(--muted);font-size:.9rem}
+    footer a{color:#d6e8ff}
+    @media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:42px}.grid{grid-template-columns:1fr}.version{max-width:520px}header{align-items:flex-start;gap:14px}nav{gap:12px;flex-wrap:wrap;justify-content:flex-end}}
+    @media(max-width:460px){header{flex-direction:column}.hero{padding-top:30px}.actions{display:grid}.button{width:100%}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <a class="brand" href="index.html" aria-label="WolFox GPS، الصفحة الرئيسية">
+      <img src="wolfox_icon.png" alt="" width="44" height="44">
+      <span>WolFox GPS</span>
+    </a>
+    <nav aria-label="روابط الموقع">
+      <a href="#about">عن الموديل</a>
+      <a href="wolfox_map.html">الخريطة</a>
+      <a href="#build">البناء</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <div>
+        <div class="eyebrow">موديل WolFox GPS</div>
+        <h1>أدوات الموقع<br>في واجهة واحدة</h1>
+        <p class="lead">موديل WolFox GPS مع صفحة خريطة تفاعلية. افتح الخريطة لاستعراض الموقع، أو راجع معلومات الإصدار وحزمة المشروع وسجل بناء APK.</p>
+        <div class="actions">
+          <a class="button primary" href="wolfox_map.html">فتح الخريطة</a>
+          <a class="button ghost" href="https://github.com/teeqp44-lgtm/cuddly-eureka/actions/workflows/main.yml">عرض عمليات بناء APK</a>
+        </div>
+      </div>
+      <aside class="version" aria-label="معلومات الإصدار">
+        <div class="version-top"><span class="version-label">الإصدار الحالي</span><span class="badge">Android module</span></div>
+        <strong>v3.1.1</strong>
+        <p>يدعم LSPatch وLSPosed بحسب بيانات المشروع.</p>
+      </aside>
+    </section>
+
+    <section class="section wrap" id="about">
+      <h2>عن الموديل</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>التطبيق المستهدف</h3>
+          <p><code>sa.alfursan.it.apps.ontimeplus</code></p>
+        </article>
+        <article class="card">
+          <h3>متطلبات Android</h3>
+          <p>الحد الأدنى المسجل في بيانات الموديل هو API 21.</p>
+        </article>
+        <article class="card" id="build">
+          <h3>البناء والتنزيل</h3>
+          <p>شغّل عملية البناء من تبويب Actions ثم نزّل APK من قسم Artifacts في تشغيل ناجح.</p>
+        </article>
+      </div>
+      <div class="note">تتطلب الخريطة اتصالًا بالإنترنت لتحميل خرائطها. وقد يحتاج استخدام الموديل إلى إعداد متوافق مع تطبيق الاستضافة وأداة الحقن المستخدمة.</div>
+      <div class="actions">
+        <a class="button ghost" href="https://github.com/teeqp44-lgtm/cuddly-eureka/blob/main/WolFox-GPS-Build-and-Connection-Ready-20260923.zip">عرض حزمة المشروع</a>
+        <a class="button ghost" href="https://github.com/teeqp44-lgtm/cuddly-eureka/actions">سجل البناء الكامل</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">WolFox GPS · <a href="https://github.com/teeqp44-lgtm/cuddly-eureka">مستودع المشروع</a></div>
+  </footer>
+</body>
+</html>

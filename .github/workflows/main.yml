@@ -1,1 +1,67 @@
+name: Build WolFox GPS Module
 
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - 'WolFox-GPS-Build-and-Connection-Ready-20260923.zip'
+      - '.github/workflows/main.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: source
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract Android project
+        working-directory: .
+        run: |
+          unzip -q WolFox-GPS-Build-and-Connection-Ready-20260923.zip -d source
+          test -f source/build-local.sh
+          test -f source/app/src/main/AndroidManifest.xml
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: Install Android packages
+        run: sdkmanager 'platforms;android-34' 'build-tools;34.0.0'
+      - name: Build and sign module
+        env:
+          WOLFOX_KEYSTORE_BASE64: ${{ secrets.WOLFOX_KEYSTORE_BASE64 }}
+          WOLFOX_KEY_ALIAS: ${{ secrets.WOLFOX_KEY_ALIAS }}
+          WOLFOX_KEYSTORE_PASS: ${{ secrets.WOLFOX_KEYSTORE_PASS }}
+          WOLFOX_KEY_PASS: ${{ secrets.WOLFOX_KEY_PASS }}
+        run: |
+          chmod +x build-local.sh
+          bash check-build.sh
+          if [ -n "$WOLFOX_KEYSTORE_BASE64" ]; then
+            test -n "$WOLFOX_KEY_ALIAS" && test -n "$WOLFOX_KEYSTORE_PASS" && test -n "$WOLFOX_KEY_PASS"
+            printf '%s' "$WOLFOX_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/wolfox-release.jks"
+            export WOLFOX_KEYSTORE_PATH="$RUNNER_TEMP/wolfox-release.jks"
+          else
+            test -z "$WOLFOX_KEY_ALIAS$WOLFOX_KEYSTORE_PASS$WOLFOX_KEY_PASS"
+            export WOLFOX_ALLOW_TEST_KEYSTORE=1
+          fi
+          ANDROID_SDK_ROOT="$ANDROID_HOME" ./build-local.sh
+      - name: Verify module contents
+        run: |
+          APK=$(find build/local/apk -maxdepth 1 -name 'WolFox_GPS_Module_v3.1.1_*_SIGNED.apk' -print -quit)
+          test -n "$APK" && test -s "$APK"
+          unzip -t "$APK"
+          unzip -p "$APK" assets/xposed_init | grep -F 'com.wolfox.gps.hook.WolFoxHook'
+          "$ANDROID_HOME/build-tools/34.0.0/apksigner" verify --verbose "$APK"
+          sha256sum "$APK"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: WolFox-GPS-Module-v3.1.1
+          path: source/build/local/apk/WolFox_GPS_Module_v3.1.1_*_SIGNED.apk
+          if-no-files-found: error
+          retention-days: 30
